@@ -4,14 +4,17 @@
 		<TITLE>signup</TITLE>
 	</head>
 	<body>
-		<form action="/signup_success/" method="POST">
-			username:<br>
-			<input name="username" type="TEXT"><br>
+		<form action="/signup_result/" method="POST">
+			id:<br>
+			<input name="id" type="TEXT"><br>
 			password:<br>
 			<input name="password" type="TEXT"><br>
 			email:<br>
 			<input name="email" type="TEXT"><br>
 			<input type="submit" value="Submit">
 		</form>
+		{% if message %}
+		 <p>{{ message }}</p>
+		{% endif %}
 	</body>
 </html>

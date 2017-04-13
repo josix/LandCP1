@@ -13,9 +13,9 @@ def sign_up_page(request):
 
 def my_login(request):
     if request.method == "POST":
-        username = request.POST['username']
+        user_id = request.POST['id']
         password = request.POST['password']
-        user = authenticate(username = username, password = password)
+        user = authenticate(username = user_id, password = password)
         if user is not None:
             login(request, user)
             return redirect("/roll_call/")
@@ -26,15 +26,15 @@ def my_login(request):
         return render_to_response("registration/my_login.html", locals())
 
 def sign_up(request):
-    if request.method == "POST":
-        username = request.POST['username']
+    if request.method == "POST" and request.POST['id'] and request.POST['password'] and request.POST['email']:
+        user_id = request.POST['id']
         password = request.POST['password']
         email = request.POST['email']
-        user = User.objects.create_user(username, email, password)
+        user = User.objects.create_user(user_id, email, password)
         #user.is_staff = True
         user.save()
         message = "註冊成功"
         return render_to_response("registration/my_login.html", locals())
-
-    return render_to_response("registration/sign_up.html")
+    message = "表單未完成"
+    return render_to_response("registration/sign_up.html", locals())
 
